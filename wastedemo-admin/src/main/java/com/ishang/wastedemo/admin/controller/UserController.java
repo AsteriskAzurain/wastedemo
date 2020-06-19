@@ -3,12 +3,16 @@ package com.ishang.wastedemo.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ishang.wastedemo.admin.entity.User;
 import com.ishang.wastedemo.admin.service.UserService;
 import com.ishang.wastedemo.core.http.HttpResult;
@@ -56,15 +60,32 @@ public class UserController {
 	public HttpResult userupdate(@RequestBody User record) {
 		return HttpResult.ok(service.updateUser(record));
 	}
-	
+
+	// public HttpResult useradd(@RequestBody User record) {
+	@CrossOrigin
 	@PostMapping(value = "/insert")
-	public HttpResult useradd(@RequestBody User record) {
-		if(record.getName()==null || record.getPassword()==null) 
+	@ResponseBody
+	public HttpResult useradd(@RequestBody String jsonParam) {
+		System.out.println(jsonParam);
+		JSONObject obj = JSON.parseObject(jsonParam);
+		
+		String username = obj.getString("username");
+		String password =obj.getString("password");
+		if(username==null || password==null) 
 			return HttpResult.error("username and password cannot be empty.");
-		if(record.getRole()==null) record.setRole(1);
-		record.setPoint(0);
-		record.setDelFlag(1);
-		return HttpResult.ok(service.save(record));
+		else {
+			User record = new User();
+			record.setName(username);
+			record.setPassword(password);
+			record.setRole(obj.getInteger("role"));
+			record.setTel(obj.getString("tel"));
+			
+			String realname = obj.getString("realname");
+			if(realname!="") record.setRealname(realname);
+			record.setPoint(0);
+			record.setDelFlag(1);
+			return HttpResult.ok(service.save(record));
+		}
 	}
 	
 	@PostMapping(value = "/delete")

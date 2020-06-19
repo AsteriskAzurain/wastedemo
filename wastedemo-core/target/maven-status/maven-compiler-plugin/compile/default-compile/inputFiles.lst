@@ -1,8 +1,8 @@
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\page\PageRequest.java
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\page\PageResult.java
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\page\MybatisPageHelper.java
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\App.java
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\service\CurdService.java
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\http\HttpStatus.java
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\exception\WastedemoException.java
-D:\java\eclipseworkspace\wastedemo-core\src\main\java\com\ishang\wastedemo\core\http\HttpResult.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\page\PageRequest.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\App.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\exception\WastedemoException.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\http\HttpResult.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\page\PageResult.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\http\HttpStatus.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\page\MybatisPageHelper.java
+D:\git\repository\wastedemo\wastedemo-core\src\main\java\com\ishang\wastedemo\core\service\CurdService.java

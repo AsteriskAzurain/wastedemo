@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.ishang.wastedemo.core.AppTest" time="0.003" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.ishang.wastedemo.core.AppTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Java\jdk1.8.0_241\jre\bin"/>
     <property name="java.vm.version" value="25.241-b07"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="D:\java\eclipseworkspace\wastedemo-core"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\git\repository\wastedemo\wastedemo-core"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="D:\java\eclipseworkspace\wastedemo-core"/>
+    <property name="user.dir" value="D:\git\repository\wastedemo\wastedemo-core"/>
     <property name="java.runtime.version" value="1.8.0_241-b07"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Java\jdk1.8.0_241\jre\lib\endorsed"/>
@@ -27,9 +27,9 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="D:\java\eclipseworkspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3437222044159903482.tmp"/>
+    <property name="classworlds.conf" value="D:\java\eclipseworkspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2579279426220139867.tmp"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.library.path" value="C:\Java\jdk1.8.0_241\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Java/jre.1.8.0_241/bin/server;C:/Java/jre.1.8.0_241/bin;C:/Java/jre.1.8.0_241/lib/amd64;D:\Anaconda3;D:\Anaconda3\Library\mingw-w64\bin;D:\Anaconda3\Library\usr\bin;D:\Anaconda3\Library\bin;D:\Anaconda3\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Java\jdk1.8\bin;C:\Java\jdk1.8\lib\tools.jar;%CATALINA_HOME%\lib;%CATALINA_HOME%\bin;C:\Java\apache-maven-3.6.2\bin;C:\Users\AsteriskFang\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\program\Rational\common;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Python\Python\Scripts\;C:\Python\Python\;C:\Users\AsteriskFang\AppData\Local\Microsoft\WindowsApps;D:\program\Bandizip\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\program\JetBrains\\IntelliJ IDEA 2019.3.3\bin;;D:\program\Microsoft VS Code\bin;D:\program\JetBrains\PyCharm 2019.3.3\bin;;C:\Java\eclipse-jee-2019-06-R-win32-x86_64\eclipse;;."/>
+    <property name="java.library.path" value="C:\Java\jdk1.8.0_241\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Java/jre.1.8.0_241/bin/server;C:/Java/jre.1.8.0_241/bin;C:/Java/jre.1.8.0_241/lib/amd64;D:\program\NetSarang\Xshell 6\;D:\Anaconda3;D:\Anaconda3\Library\mingw-w64\bin;D:\Anaconda3\Library\usr\bin;D:\Anaconda3\Library\bin;D:\Anaconda3\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Java\jdk1.8\bin;C:\Java\jdk1.8\lib\tools.jar;%CATALINA_HOME%\lib;%CATALINA_HOME%\bin;C:\Java\apache-maven-3.6.2\bin;C:\Windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\program\Rational\common;D:\program\Git\cmd;D:\program\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Python\Python\Scripts\;C:\Python\Python\;C:\Users\AsteriskFang\AppData\Local\Microsoft\WindowsApps;D:\program\Bandizip\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\program\JetBrains\\IntelliJ IDEA 2019.3.3\bin;D:\program\Microsoft VS Code\bin;D:\program\JetBrains\PyCharm 2019.3.3\bin;C:\Users\AsteriskFang\AppData\Local\GitHubDesktop\bin;C:\Users\AsteriskFang\AppData\Roaming\npm;C:\Java\eclipse-jee-2019-06-R-win32-x86_64\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -44,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Java\jdk1.8.0_241\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B -gs C:\Java\apache-maven-3.6.2\conf\settings.xml install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B -s D:\java\settings.xml install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="zh"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,5 +61,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.ishang.wastedemo.core.AppTest" name="testApp" time="0.003"/>
+  <testcase classname="com.ishang.wastedemo.core.AppTest" name="testApp" time="0.002"/>
 </testsuite>
