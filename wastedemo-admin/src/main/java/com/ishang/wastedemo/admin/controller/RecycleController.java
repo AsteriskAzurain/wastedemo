@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.ishang.wastedemo.admin.entity.PointDetail;
 import com.ishang.wastedemo.admin.entity.RecycleOrder;
 import com.ishang.wastedemo.admin.entity.RecycleOrderDetail;
 import com.ishang.wastedemo.admin.entity.Rubbish;
 import com.ishang.wastedemo.admin.entity.RubbishType;
 import com.ishang.wastedemo.admin.entity.UserTotalData;
+import com.ishang.wastedemo.admin.service.PointDetailService;
 import com.ishang.wastedemo.admin.service.RecycleOrderDetailService;
 import com.ishang.wastedemo.admin.service.RecycleOrderService;
 import com.ishang.wastedemo.admin.service.RecycleSiteService;
@@ -57,6 +59,9 @@ public class RecycleController {
 	@Autowired
 	private UserService userservice;
 	
+	@Autowired
+	private PointDetailService pointdetailservice;
+	
 	/* todo
 	 * 1查找回收点
 	 * 2创建回收订单
@@ -88,14 +93,22 @@ public class RecycleController {
 		JSONObject obj= JSON.parseObject(jsonParam);
 		// order
 		RecycleOrder neworder= new RecycleOrder();
-		neworder.setUserid(obj.getInteger("userid"));
+		int userid=obj.getInteger("userid");
+		neworder.setUserid(userid);
 		neworder.setSiteid(obj.getInteger("siteid"));
 		neworder.setPointnumber(100f);
-		userservice.updatepoint(neworder.getUserid(), 100);
+		userservice.updatepoint(userid, 100);
+		PointDetail pd=new PointDetail();
+		pd.setUserid(userid);
+		pd.setNum(100);
+		pd.setSource("下单奖励");
 		neworder.setTotalnumber(obj.getInteger("totalnumber"));
 		neworder.setTotalprice(obj.getFloat("totalprice"));
 		java.sql.Date dt= new java.sql.Date(new Date().getTime());
 		neworder.setCreatetime(dt);
+		pd.setCreatetime(dt);
+		if(pointdetailservice.save(pd)>0) System.out.println("point detail save succeed.");
+		else return HttpResult.error("下单失败，请重试");
 		neworder.setDelFlag(1);
 		if(orderservice.save(neworder)==0) return HttpResult.error("下单失败，请重试");
 		int orderid=neworder.getId();

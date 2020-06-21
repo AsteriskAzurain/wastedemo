@@ -13,4 +13,6 @@ public interface PointDetailMapper {
     List<PointDetail> selectAll();
 
     int updateByPrimaryKey(PointDetail record);
+    
+    List<PointDetail> selectByUserid(int userid);
 }

@@ -11,5 +11,7 @@ import com.ishang.wastedemo.core.service.CurdService;
 public interface PointDetailService extends CurdService<PointDetail> {
 
 	List<PointDetail> findall();
+	
+	List<PointDetail> findbyuserid(int userid);
 
 }

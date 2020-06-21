@@ -19,40 +19,39 @@ public class PointDetailServiceImpl implements PointDetailService {
 
 	@Override
 	public int save(PointDetail record) {
-		// TODO Auto-generated method stub
 		return detaildao.insert(record);
 	}
 
 	@Override
 	public int delete(PointDetail record) {
-		// TODO Auto-generated method stub
 		//不允许删除
 		return 0;
 	}
 
 	@Override
 	public int delete(List<PointDetail> records) {
-		// TODO Auto-generated method stub
 		//不允许删除
 		return 0;
 	}
 
 	@Override
 	public PointDetail findById(Long id) {
-		// TODO Auto-generated method stub
 		return detaildao.selectByPrimaryKey(id.intValue());
 	}
 
 	@Override
 	public PageResult findPage(PageRequest pageRequest) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<PointDetail> findall() {
-		// TODO Auto-generated method stub
 		return detaildao.selectAll();
+	}
+
+	@Override
+	public List<PointDetail> findbyuserid(int userid) {
+		return detaildao.selectByUserid(userid);
 	}
 
 }

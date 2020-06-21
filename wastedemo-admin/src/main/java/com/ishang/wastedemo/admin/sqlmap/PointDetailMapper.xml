@@ -35,4 +35,10 @@
     select id, userid, createtime, num, `source`
     from point_detail
   </select>
+  
+  <select id="selectByUserid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	 select id, userid, createtime, num, `source`
+    from point_detail
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
 </mapper>
