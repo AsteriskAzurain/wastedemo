@@ -26,4 +26,9 @@ public interface UserService extends CurdService<User> {
 	 * todo: dao和xml自己写
 	 * */
 	List<User> findUser(User record);
+	
+	/**
+	 * 下单时 更新用户的积分数
+	 */
+	int updatepoint(int userid,int point);
 }

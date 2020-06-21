@@ -1,9 +1,11 @@
 package com.ishang.wastedemo.admin.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ishang.wastedemo.admin.entity.RecycleOrder;
 import com.ishang.wastedemo.admin.entity.RecycleOrderDetail;
@@ -25,8 +28,10 @@ import com.ishang.wastedemo.admin.service.RecycleOrderDetailService;
 import com.ishang.wastedemo.admin.service.RecycleOrderService;
 import com.ishang.wastedemo.admin.service.RecycleSiteService;
 import com.ishang.wastedemo.admin.service.RubbishService;
+import com.ishang.wastedemo.admin.service.UserService;
 import com.ishang.wastedemo.admin.service.UserTotalDataService;
 import com.ishang.wastedemo.core.http.HttpResult;
+import com.mysql.cj.xdevapi.JsonArray;
 
 @RestController
 @RequestMapping("recycle")
@@ -49,6 +54,9 @@ public class RecycleController {
 	@Autowired
 	private UserTotalDataService dataservice;
 	
+	@Autowired
+	private UserService userservice;
+	
 	/* todo
 	 * 1查找回收点
 	 * 2创建回收订单
@@ -70,54 +78,76 @@ public class RecycleController {
 	 * */
 	
 	//2
+//	public HttpResult orderadd(@RequestParam int userid, @RequestParam int siteid,
+//			@RequestParam int n1, @RequestParam int n2, @RequestParam int n3, 
+//			@RequestParam int n4, @RequestParam int n5, @RequestParam int n6) {
+	
 	@PostMapping(value = "/order/add")
-	public HttpResult orderadd(@RequestParam int userid, @RequestParam int siteid,
-			@RequestParam int n1, @RequestParam int n2, @RequestParam int n3, 
-			@RequestParam int n4, @RequestParam int n5, @RequestParam int n6) {
-		
+	public HttpResult orderadd(@RequestBody String jsonParam) {
+//		System.out.println("json:   "+jsonParam);
+		JSONObject obj= JSON.parseObject(jsonParam);
 		// order
 		RecycleOrder neworder= new RecycleOrder();
-		neworder.setUserid(userid);
-		neworder.setSiteid(siteid);
-		neworder.setPointnumber(0f);
-		neworder.setTotalnumber(0);
+		neworder.setUserid(obj.getInteger("userid"));
+		neworder.setSiteid(obj.getInteger("siteid"));
+		neworder.setPointnumber(100f);
+		userservice.updatepoint(neworder.getUserid(), 100);
+		neworder.setTotalnumber(obj.getInteger("totalnumber"));
+		neworder.setTotalprice(obj.getFloat("totalprice"));
 		java.sql.Date dt= new java.sql.Date(new Date().getTime());
 		neworder.setCreatetime(dt);
+		neworder.setDelFlag(1);
+		if(orderservice.save(neworder)==0) return HttpResult.error("下单失败，请重试");
+		int orderid=neworder.getId();
+		JSONArray arr=obj.getJSONArray("detail");
+		List<Integer> ridarr= new ArrayList<Integer>();
+		Map<Integer,Integer> detailmap=new HashMap<Integer, Integer>();
+		for (Object object : arr) {
+			// {"subprice":3,"subtotal":9,"rubbishid":4,"count":3,"delFlag":true,"userid":6,"key":1592733281821}
+			JSONObject jobj=(JSONObject)object;
+			int rubbishid=jobj.getInteger("rubbishid");
+			int count=jobj.getInteger("count");
+			if(!(null==(detailmap.get(rubbishid)))) count+=detailmap.get(rubbishid);
+			else ridarr.add(rubbishid);
+			detailmap.put(rubbishid, count);
+		}
 		
-		int[] numarr= {n1,n2,n3,n4,n5,n6};
-		List<Rubbish> rubbisharr=rubbishservice.selectbytype(typeid);
-		int sn=0; float sp=0f;
-		for(int i =0; i<6; i++) {
-			int num=numarr[i];
-			sn+=num;
-			sp+=(numarr[i]*rubbisharr.get(i).getPrice());
-			
-			//rubbish data
-			if(num>0) {
-				UserTotalData newdata = new UserTotalData();
-				newdata.setUserid(userid);
-				newdata.setRubbishid(rubbisharr.get(i).getId());
-				newdata.setRubbishtype(typeid);
-				newdata.setNumber(num);
-				newdata.setCreatetime(dt);
-				newdata.setDelFlag(1);
-				dataservice.save(newdata);
+		for (Integer rid : ridarr) {
+			int count=detailmap.get(rid);
+			for (int i = 0; i < count; i++) {
+				RecycleOrderDetail d =new RecycleOrderDetail();
+				d.setOrderid(orderid);
+				d.setRubbishid(rid);
+				d.setDelFlag(1);
+				detailservice.save(d);
 			}
 		}
-		neworder.setPointnumber(sp);
-		neworder.setTotalnumber(sn);
-		int orderid = orderservice.save(neworder);
-		
-		for(int i =0; i<6; i++) {
-			//orderdetail
-			RecycleOrderDetail d =new RecycleOrderDetail();
-			d.setOrderid(orderid);
-			d.setRubbishid(rubbisharr.get(i).getId());
-			d.setDelFlag(1);
-			detailservice.save(d);
-		}	
-		
-		return HttpResult.ok(dt.toString());
+		return HttpResult.ok("下单成功");
+	}
+	
+	// 3 
+	@CrossOrigin
+	@ResponseBody
+	@PostMapping(value = "/order/selectownorder")
+	public HttpResult orderfindown(@RequestBody String jsonParam) {
+		System.out.println(jsonParam);
+		JSONObject object = JSON.parseObject(jsonParam);
+		int id=object.getInteger("id");
+		List<RecycleOrder>  rstlist = orderservice.findbyuserid(id);
+		if(rstlist.size()>0) {
+			List<Map<String , Object>> maplist= new ArrayList<Map<String,Object>>();
+			for (RecycleOrder recycleOrder : rstlist) {
+				Map<String,Object> map=new HashMap<String, Object>();
+				map.put("order", recycleOrder);
+				int oid=recycleOrder.getId();
+				List<RecycleOrderDetail> detaillist = detailservice.findbyorderid(oid);
+				map.put("detail", detaillist);
+				maplist.add(map);
+			}
+			System.out.println(maplist.toString());
+			return HttpResult.ok(maplist);
+		}
+		else return HttpResult.error("暂无订单信息");
 	}
 	
 	//4.1
@@ -133,6 +163,13 @@ public class RecycleController {
 	public HttpResult sitefindall() {
 					return HttpResult.ok(siteservice.findAll());
 //			return HttpResult.ok();
+		}
+	
+	@CrossOrigin
+	@ResponseBody
+	@PostMapping(value = "/site/findallarea")
+	public HttpResult sitefindallarea() {
+					return HttpResult.ok(siteservice.findAllArea());
 		}
 	
 	

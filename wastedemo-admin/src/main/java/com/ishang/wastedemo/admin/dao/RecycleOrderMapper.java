@@ -13,4 +13,6 @@ public interface RecycleOrderMapper {
     List<RecycleOrder> selectAll();
 
     int updateByPrimaryKey(RecycleOrder record);
+    
+    List<RecycleOrder> selectByUserid(int userid);
 }

@@ -61,4 +61,14 @@ public class UserServiceImpl implements UserService{
 		return dao.findbyname(record.getName());
 	}
 
+	@Override
+	public int updatepoint(int userid,int point) {
+		User user = findById((long) userid);
+		if(null!=user) {
+			int oldpoint=user.getPoint();
+			point+=oldpoint;
+			return dao.updatepoint(userid, point);
+		}else return 0;
+	}
+
 }

@@ -44,7 +44,6 @@
     from user
   </select>
 
-
   <!-- 只更新有变化的字段 -->
   <update id="updateByPrimaryKey" parameterType="com.ishang.wastedemo.admin.entity.User">
 	update user
@@ -71,4 +70,10 @@
      from user
      where name = #{name}
    </select>
+   
+   <update id="updatepoint" >
+   		UPDATE `user` 
+   		SET `point`=#{point} 
+   		WHERE `id`=#{userid}
+   </update>
 </mapper>

@@ -33,4 +33,9 @@
     select id, orderid, rubbishid, del_flag
     from recycle_order_detail
   </select>
+  <select id="selectByOrderid"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select id, orderid, rubbishid, del_flag
+    from recycle_order_detail
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </select>
 </mapper>

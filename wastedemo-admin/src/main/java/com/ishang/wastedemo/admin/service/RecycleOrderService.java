@@ -12,4 +12,5 @@ public interface RecycleOrderService extends CurdService<RecycleOrder> {
 
 	List<RecycleOrder> findall();
 
+	List<RecycleOrder> findbyuserid(int userid);
 }

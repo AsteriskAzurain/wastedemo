@@ -15,7 +15,7 @@
     delete from recycle_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ishang.wastedemo.admin.entity.RecycleOrder">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ishang.wastedemo.admin.entity.RecycleOrder">
     insert into recycle_order (id, userid, siteid, 
       pointnumber, totalnumber, totalprice, 
       createtime, del_flag)
@@ -42,5 +42,10 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select id, userid, siteid, pointnumber, totalnumber, totalprice, createtime, del_flag
     from recycle_order
+  </select>
+  <select id="selectByUserid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select id, userid, siteid, pointnumber, totalnumber, totalprice, createtime, del_flag
+    from recycle_order
+    where userid=#{userid}
   </select>
 </mapper>

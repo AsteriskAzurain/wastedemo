@@ -1,7 +1,10 @@
 package com.ishang.wastedemo.admin.dao;
 
-import com.ishang.wastedemo.admin.entity.User;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.ishang.wastedemo.admin.entity.User;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -21,5 +24,7 @@ public interface UserMapper {
 	List<User> findbyentity(User record);
 	
 	List<User> findbyname(String name);
+	
+	int updatepoint(@Param(value = "userid")int userid, @Param(value = "point")int point);
 	
 }
