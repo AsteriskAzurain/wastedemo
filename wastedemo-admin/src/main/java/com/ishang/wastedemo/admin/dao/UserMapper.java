@@ -18,7 +18,8 @@ public interface UserMapper {
 	
 	//--------------------
 	
-
-	List<User> findbyname(User record);
+	List<User> findbyentity(User record);
+	
+	List<User> findbyname(String name);
 	
 }

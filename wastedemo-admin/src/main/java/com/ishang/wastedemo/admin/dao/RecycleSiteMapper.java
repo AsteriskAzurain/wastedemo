@@ -13,4 +13,8 @@ public interface RecycleSiteMapper {
     List<RecycleSite> selectAll();
 
     int updateByPrimaryKey(RecycleSite record);
+    
+    List<String> selectAreaList();
+    
+    List<RecycleSite> selectbyarea(String areaname);
 }

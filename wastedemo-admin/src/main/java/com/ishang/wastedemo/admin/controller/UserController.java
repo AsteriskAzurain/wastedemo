@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.ishang.wastedemo.admin.entity.Admin;
 import com.ishang.wastedemo.admin.entity.User;
 import com.ishang.wastedemo.admin.service.UserService;
 import com.ishang.wastedemo.core.http.HttpResult;
@@ -34,31 +35,73 @@ public class UserController {
 	 * 7模糊查找
 	 * */
 	
+	// public HttpResult userlogin(@RequestParam String name,@RequestParam String passwd)
+	@CrossOrigin
+	@ResponseBody
 	@PostMapping(value="/login")
-	public HttpResult userlogin(@RequestParam String name,@RequestParam String passwd) {
-		User u = new User();
-		u.setName(name);
-		u.setPassword(passwd);
-		List<User> rst = service.findUser(u);
-		if(!rst.get(0).getPassword().equals(passwd)) return HttpResult.error("wrong password");
-		else return HttpResult.ok("login succeed");
+	public HttpResult userlogin(@RequestBody String jsonParam) {
+		JSONObject obj = JSON.parseObject(jsonParam);
+		String name = obj.getString("name");
+		String passwd = obj.getString("passwd");
+		if (null != name && null != passwd) {
+			User u = new User();
+			u.setName(name);
+			u.setPassword(passwd);
+			List<User> rst = service.findUser(u);
+			System.out.println(rst.toString());
+			if(!rst.get(0).getPassword().equals(passwd)) return HttpResult.error("wrong password");
+			else return HttpResult.ok(rst.get(0));
+		}else {
+			return HttpResult.error("用户名或密码不能为空");
+		}
+		
 	}
 	
+	// public HttpResult userpasswd(@RequestParam int id, @RequestParam String p1, @RequestParam String p2) {
+	@CrossOrigin
+	@ResponseBody
 	@PostMapping(value = "/password")
-	public HttpResult userpasswd(@RequestParam int id, @RequestParam String p1, @RequestParam String p2) {
-		if(!p1.equals(p2)) return HttpResult.error("The two passwords are inconsistent, please re-enter.");
+	public HttpResult userpasswd(@RequestBody String jsonParam) {
+		System.out.println(jsonParam);
+		JSONObject obj =JSON.parseObject(jsonParam);
+		int id = obj.getInteger("id");
+		String p1=obj.getString("pswd1"); 
+		String p2=obj.getString("oldpswd");
+		if(p1.equals(p2)) return HttpResult.error("新旧密码相同，请重新输入");
 		else {
 			User u = new User();
 			u.setId(id);
 			u.setPassword(p1);
 			service.updateUser(u);
-			return HttpResult.ok("password updated");
+			return HttpResult.ok(service.findById((long) id));
 		}
 	}
 	
+	// public HttpResult userupdate(@RequestBody User record)
+	@CrossOrigin
+	@ResponseBody
 	@PostMapping(value = "/update")
-	public HttpResult userupdate(@RequestBody User record) {
-		return HttpResult.ok(service.updateUser(record));
+	public HttpResult userupdate(@RequestBody String jsonParam) {
+		System.out.println(jsonParam);
+		JSONObject obj =JSON.parseObject(jsonParam);
+		// jsonParam: {"id":6,"name":"user","password":"user","realname":"update","tel":"138254564","role":1,"point":0,"delFlag":1}
+		User record = new User();
+		record.setId(obj.getInteger("id"));
+		record.setName(obj.getString("name"));
+		record.setRole(obj.getInteger("role"));
+		record.setRealname(obj.getString("realname"));
+		record.setTel(obj.getString("tel"));
+		/*
+		 * String realname = obj.getString("realname"); String tel =
+		 * obj.getString("tel"); if(!realname.equals("")) record.setRealname(realname);
+		 * if(!tel.equals("")) record.setTel(tel);
+		 */
+		if(service.updateUser(record)==1) {
+			System.out.println("update:"+service.findById(obj.getLong("id")).toString());
+			return HttpResult.ok(service.findById(obj.getLong("id")));
+		}else {
+			return HttpResult.error();
+		}
 	}
 
 	// public HttpResult useradd(@RequestBody User record) {
@@ -106,4 +149,15 @@ public class UserController {
 		u.setName(name);
 		return HttpResult.ok(service.findUser(u));
 	}
+	
+	@CrossOrigin
+	@ResponseBody
+	@PostMapping(value = "/loaduserinfo")
+		public HttpResult userloadinfo(@RequestBody String jsonParam) {
+			JSONObject object = JSON.parseObject(jsonParam);
+			long id = object.getLong("id");
+			return HttpResult.ok(service.findById(id));
+//			return HttpResult.ok();
+		}
+	
 }

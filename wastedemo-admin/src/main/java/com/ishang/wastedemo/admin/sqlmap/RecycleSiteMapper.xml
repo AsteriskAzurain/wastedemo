@@ -35,4 +35,14 @@
     select id, sitename, area, address, del_flag
     from recycle_site
   </select>
+  
+  <select id="selectAreaList" resultType="java.lang.String">
+  	SELECT area FROM `recycle_site`;
+  </select>
+  
+  <select id="selectbyarea" parameterType="java.lang.String" resultMap="BaseResultMap">
+	  select id, sitename, area, address, del_flag
+	    from recycle_site
+		WHERE area='#{areaname}'
+  </select>
 </mapper>
