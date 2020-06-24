@@ -38,4 +38,29 @@
     from recycle_order_detail
     where orderid = #{orderid,jdbcType=INTEGER}
   </select>
+  <select id="getDataRubbishType" resultType="com.ishang.wastedemo.admin.entity.ResultData">
+  	SELECT rubbishid as id,COUNT(detail.id) AS count
+	FROM recycle_order_detail detail LEFT JOIN rubbish ON detail.rubbishid=rubbish.id
+	WHERE detail.orderid in(
+		SELECT id FROM recycle_order
+		WHERE DATE_FORMAT( createtime, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ))
+	GROUP BY detail.rubbishid
+	ORDER BY detail.rubbishid
+  </select>
+
+  <select id="getUserRubbishCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	SELECT COUNT(id) as rubbishcount 
+	FROM recycle_order_detail 
+	WHERE orderid in(
+		SELECT id FROM `recycle_order` 
+		WHERE DATE_FORMAT( recycle_order.createtime, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' )
+		AND userid=#{userid}
+	)
+  </select>
+  <select id="getDataRubbishCount" resultType="com.ishang.wastedemo.admin.entity.ResultData">
+  	SELECT rubbishid as id,COUNT(recycle_order_detail.id) as count
+	FROM recycle_order_detail 
+	GROUP BY rubbishid 
+	ORDER BY count DESC
+  </select>
 </mapper>

@@ -1,12 +1,14 @@
 package com.ishang.wastedemo.admin.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ishang.wastedemo.admin.dao.RecycleOrderDetailMapper;
 import com.ishang.wastedemo.admin.entity.RecycleOrderDetail;
+import com.ishang.wastedemo.admin.entity.ResultData;
 import com.ishang.wastedemo.admin.service.RecycleOrderDetailService;
 import com.ishang.wastedemo.core.page.PageRequest;
 import com.ishang.wastedemo.core.page.PageResult;
@@ -47,6 +49,16 @@ public class RecycleOrderDetailServiceImpl implements RecycleOrderDetailService 
 	@Override
 	public List<RecycleOrderDetail> findbyorderid(int orderid) {
 		return dao.selectByOrderid(orderid);
+	}
+
+	@Override
+	public List<ResultData> getdata1() {
+		return dao.getDataRubbishType();
+	}
+
+	@Override
+	public List<ResultData> getdata3() {
+		return dao.getDataRubbishCount();
 	}
 
 }

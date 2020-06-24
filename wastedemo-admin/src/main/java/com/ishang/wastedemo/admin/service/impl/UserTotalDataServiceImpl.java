@@ -19,33 +19,28 @@ public class UserTotalDataServiceImpl implements UserTotalDataService {
 	
 	@Override
 	public int save(UserTotalData record) {
-		// TODO Auto-generated method stub
 		return dao.insert(record);
 	}
 
 	@Override
 	public int delete(UserTotalData record) {
-		// TODO Auto-generated method stub
 		// 不允许删除
 		return 0;
 	}
 
 	@Override
 	public int delete(List<UserTotalData> records) {
-		// TODO Auto-generated method stub
 		// 不允许删除
 		return 0;
 	}
 
 	@Override
 	public UserTotalData findById(Long id) {
-		// TODO Auto-generated method stub
 		return dao.selectByPrimaryKey(id.intValue());
 	}
 
 	@Override
 	public PageResult findPage(PageRequest pageRequest) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

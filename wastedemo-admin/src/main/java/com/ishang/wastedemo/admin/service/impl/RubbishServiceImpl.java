@@ -19,20 +19,17 @@ public class RubbishServiceImpl implements RubbishService {
 	
 	@Override
 	public int save(Rubbish record) {
-		// TODO Auto-generated method stub
 		return dao.insert(record);
 	}
 
 	@Override
 	public int delete(Rubbish record) {
-		// TODO Auto-generated method stub
 		record.setDelFlag(0);
 		return dao.updateByPrimaryKey(record);
 	}
 
 	@Override
 	public int delete(List<Rubbish> records) {
-		// TODO Auto-generated method stub
 		for(Rubbish r : records) 
 			delete(r);
 		return 0;
@@ -40,25 +37,21 @@ public class RubbishServiceImpl implements RubbishService {
 
 	@Override
 	public Rubbish findById(Long id) {
-		// TODO Auto-generated method stub
 		return dao.selectByPrimaryKey(id.intValue());
 	}
 
 	@Override
 	public PageResult findPage(PageRequest pageRequest) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Rubbish> selectbytype(int typeid) {
-		// TODO Auto-generated method stub
 		return dao.selectbytype(typeid);
 	}
 
 	@Override
 	public List<Rubbish> findall() {
-		// TODO Auto-generated method stub
 		return dao.selectAll();
 	}
 

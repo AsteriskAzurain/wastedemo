@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ishang.wastedemo.admin.entity.RecycleOrder;
+import com.ishang.wastedemo.admin.entity.ResultData;
 import com.ishang.wastedemo.core.service.CurdService;
 
 @Service
@@ -13,4 +14,10 @@ public interface RecycleOrderService extends CurdService<RecycleOrder> {
 	List<RecycleOrder> findall();
 
 	List<RecycleOrder> findbyuserid(int userid);
+	
+	List<ResultData> getdata2();
+	
+	List<ResultData> getdata4();
+
+	
 }

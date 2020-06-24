@@ -1,6 +1,8 @@
 package com.ishang.wastedemo.admin.dao;
 
 import com.ishang.wastedemo.admin.entity.RecycleOrder;
+import com.ishang.wastedemo.admin.entity.ResultData;
+
 import java.util.List;
 
 public interface RecycleOrderMapper {
@@ -15,4 +17,8 @@ public interface RecycleOrderMapper {
     int updateByPrimaryKey(RecycleOrder record);
     
     List<RecycleOrder> selectByUserid(int userid);
+    
+    List<ResultData> getDataordercount();
+    
+    List<Integer> getUserId();
 }

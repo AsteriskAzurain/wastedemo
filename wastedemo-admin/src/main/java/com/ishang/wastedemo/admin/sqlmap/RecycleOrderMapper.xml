@@ -48,4 +48,15 @@
     from recycle_order
     where userid=#{userid}
   </select>
+  <select id="getUserId" resultType="java.lang.Integer">
+  	SELECT DISTINCT userid FROM recycle_order
+	WHERE DATE_FORMAT( recycle_order.createtime, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' )
+  </select>
+    <select id="getDataordercount" resultType="com.ishang.wastedemo.admin.entity.ResultData">
+	SELECT DISTINCT userid as id,COUNT(recycle_order.id) as count 
+	FROM `recycle_order` 
+	WHERE DATE_FORMAT( recycle_order.createtime, '%Y%m' ) = DATE_FORMAT( CURDATE() , '%Y%m' )
+	GROUP BY userid 
+	ORDER BY count DESC
+  </select>
 </mapper>
